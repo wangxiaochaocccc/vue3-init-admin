@@ -24,5 +24,3 @@ module.exports = {
     'subject-case': [0]
   }
 }
-
-
