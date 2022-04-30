@@ -1,4 +1,4 @@
-# vue-t
+# vue-init
 
 ## Project setup
 
