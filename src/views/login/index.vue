@@ -1,6 +1,6 @@
 <template>
   <div class='login-container'>
-    <el-form class="form-container" :model="loginForm" :rules="loginRules">
+    <el-form ref="formRef" class="form-container" :model="loginForm" :rules="loginRules">
       <h3>用户登录</h3>
       <el-form-item prop="username">
         <span class="svg-container">
@@ -18,7 +18,8 @@
           <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'"></svg-icon>
         </span>
       </el-form-item>
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px;">登录</el-button>
+      <el-button :loading="loading" @click="handleLogin" type="primary" style="width: 100%; margin-bottom: 30px;">登录
+      </el-button>
     </el-form>
   </div>
 
@@ -28,6 +29,7 @@
 import SvgIcon from '../../components/SvgIcon/index.vue'
 import { reactive, ref } from 'vue'
 import { passwordRule } from './rule'
+import { useStore } from 'vuex'
 // 数据源
 const loginForm = reactive({
   username: 'super-admin',
@@ -50,9 +52,25 @@ const loginRules = reactive({
 })
 // 密码通用处理
 const passwordType = ref('password')
-
 const onChangePwd = () => {
   passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
+}
+// 触发登录
+const loading = ref(false)
+const formRef = ref(null)
+const store = useStore()
+const handleLogin = () => {
+  // 表单校验
+  formRef.value.validate(valid => {
+    if (!valid) return
+    loading.value = true
+    store.dispatch('user/login', loginForm.value).then(() => {
+      loading.value = false
+    }).catch(err => {
+      console.log(err)
+      loading.value = false
+    })
+  })
 }
 </script>
 <style lang='scss'>

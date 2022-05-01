@@ -1,6 +1,8 @@
-import login from '@/api/sys'
+import { login } from '@/api/sys'
 import md5 from 'md5'
+
 export default {
+  namespaced: true,
   actions: {
     login (context, userInfo) {
       const { username, password } = userInfo
