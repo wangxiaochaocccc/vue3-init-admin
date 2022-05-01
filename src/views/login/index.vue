@@ -64,7 +64,7 @@ const handleLogin = () => {
   formRef.value.validate(valid => {
     if (!valid) return
     loading.value = true
-    store.dispatch('user/login', loginForm.value).then(() => {
+    store.dispatch('user/login', loginForm).then(() => {
       loading.value = false
     }).catch(err => {
       console.log(err)
