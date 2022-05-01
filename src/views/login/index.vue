@@ -13,9 +13,9 @@
         <span class="svg-container">
           <svg-icon icon="password"></svg-icon>
         </span>
-        <el-input placeholder="请输入密码" v-model="loginForm.password" name="password"></el-input>
-        <span class="svg-password-show">
-          <svg-icon icon="eye"></svg-icon>
+        <el-input placeholder="请输入密码" v-model="loginForm.password" :type="passwordType" name="password"></el-input>
+        <span class="svg-password-show" @click="onChangePwd">
+          <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'"></svg-icon>
         </span>
       </el-form-item>
       <el-button type="primary" style="width: 100%; margin-bottom: 30px;">登录</el-button>
@@ -26,7 +26,7 @@
 
 <script setup>
 import SvgIcon from '../../components/SvgIcon/index.vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { passwordRule } from './rule'
 // 数据源
 const loginForm = reactive({
@@ -48,6 +48,12 @@ const loginRules = reactive({
     validator: passwordRule()
   }]
 })
+// 密码通用处理
+const passwordType = ref('password')
+
+const onChangePwd = () => {
+  passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
+}
 </script>
 <style lang='scss'>
 .login-container {
