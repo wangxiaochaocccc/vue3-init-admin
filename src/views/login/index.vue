@@ -1,19 +1,19 @@
 <template>
   <div class='login-container'>
-    <el-form class="form-container">
+    <el-form class="form-container" :model="loginForm" :rules="loginRules">
       <h3>用户登录</h3>
-      <el-form-item>
+      <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon="user"></svg-icon>
         </span>
-        <el-input placeholder="请输入用户名" name="username" type="text"></el-input>
+        <el-input placeholder="请输入用户名" v-model="loginForm.username" name="username" type="text"></el-input>
       </el-form-item>
 
-      <el-form-item>
+      <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon="password"></svg-icon>
         </span>
-        <el-input placeholder="请输入密码" name="password"></el-input>
+        <el-input placeholder="请输入密码" v-model="loginForm.password" name="password"></el-input>
         <span class="svg-password-show">
           <svg-icon icon="eye"></svg-icon>
         </span>
@@ -24,12 +24,30 @@
 
 </template>
 
-<script>
+<script setup>
 import SvgIcon from '../../components/SvgIcon/index.vue'
-export default {
-  name: 'login',
-  components: { SvgIcon }
-}
+import { reactive } from 'vue'
+import { passwordRule } from './rule'
+// 数据源
+const loginForm = reactive({
+  username: 'super-admin',
+  password: '123456'
+})
+
+// 校验规则
+const loginRules = reactive({
+  username: [{
+    required: true,
+    trigger: 'blur',
+    message: '用户名为必填项'
+  }],
+  password: [{
+    required: true,
+    trigger: 'blur',
+    message: '请输入密码',
+    validator: passwordRule()
+  }]
+})
 </script>
 <style lang='scss'>
 .login-container {
