@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import store from '../store'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
@@ -9,6 +10,9 @@ const service = axios.create({
 // 配置icode 请求拦截器
 service.interceptors.request.use(
   config => {
+    if (store.getters.token) {
+      config.headers.Authorization = `Bearer ${store.getters.token}`
+    }
     config.headers.icode = 'F7CEF22D3DFD9445'
     return config
   }
