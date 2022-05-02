@@ -1,9 +1,37 @@
 <template>
-  <div class=''>layout页面</div>
+  <div class='app-container'>
+    <side-bar class="sidebar-container" :style="{ background: Variable.menuBg }"></side-bar>
+    <div class="main-container">
+      <div class="nav-bar-container">
+        <nav-bar></nav-bar>
+      </div>
+      <app-main></app-main>
+    </div>
+  </div>
 </template>
 
 <script setup>
-
+import SideBar from '@/layout/sidebar'
+import NavBar from '@/layout/components/NavBar.vue'
+import AppMain from '@/layout/components/AppMain.vue'
+import Variable from '@/assets/styles/variable.scss'
 </script>
 <style lang='scss'>
+@import '~@/assets/styles/mixin.scss';
+@import '~@/assets/styles/variable.scss';
+
+.app-container {
+  @include clearfix;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .nav-bar-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: calc(100% - #{$sideBarWidth});
+  }
+}
 </style>
