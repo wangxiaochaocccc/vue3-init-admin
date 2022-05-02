@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import store from '../store'
+import store from '@/store'
+import { isCheckTimeStamp } from '@/utils/auth'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
@@ -11,6 +12,10 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
+      if (isCheckTimeStamp()) {
+        store.dispatch('user/logout')
+        return Promise.reject(new Error('token 失效'))
+      }
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
     config.headers.icode = 'F7CEF22D3DFD9445'

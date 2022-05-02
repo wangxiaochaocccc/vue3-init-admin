@@ -3,6 +3,8 @@ import md5 from 'md5'
 import { setItem, getItem, clearAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant/index'
 import router from '@/router/index'
+import { setTimeStamp } from '@/utils/auth'
+
 export default {
   namespaced: true,
   state: () => ({
@@ -30,6 +32,8 @@ export default {
         }).then(data => {
           this.commit('user/setToken', data.token)
           router.push('/')
+          // 保存时间
+          setTimeStamp()
           resolve()
         }).catch(err => {
           reject(err)
@@ -41,7 +45,7 @@ export default {
       this.commit('user/setUserInfo', res)
       return res
     },
-    loginout () {
+    logout () {
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
       clearAllItem()

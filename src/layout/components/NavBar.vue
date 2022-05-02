@@ -29,7 +29,7 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 const loginout = () => {
-  store.dispatch('user/loginout')
+  store.dispatch('user/logout')
 }
 </script>
 <style lang='scss'>
