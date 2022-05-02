@@ -16,7 +16,7 @@
             <router-link to="/">
               <el-dropdown-item>课程主页</el-dropdown-item>
             </router-link>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item divided>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
