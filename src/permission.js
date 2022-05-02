@@ -6,13 +6,13 @@ const WhileList = ['/login']
 router.beforeEach(async (to, from, next) => {
   // 快捷访问
   const token = store.getters.token
-  console.log(token)
   // 存在token
   if (token) {
     if (to.path === '/login') {
       next('/')
     } else {
-      if (!store.getters.userInfo) {
+      if (!store.getters.hasUserInfo) {
+        console.log(11122)
         await store.dispatch('user/getUserInfo')
       }
       next()
