@@ -6,7 +6,7 @@ import router from '@/router/index'
 export default {
   namespaced: true,
   state: () => ({
-    state: getItem(TOKEN) || ''
+    token: getItem(TOKEN) || ''
   }),
   mutations: {
     setToken (state, token) {

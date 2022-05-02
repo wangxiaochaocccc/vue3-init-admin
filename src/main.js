@@ -7,6 +7,7 @@ import 'element-plus/dist/index.css'
 import './assets/styles/index.scss'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import installSvgIcon from './icons/index.js'
+import './permission.js'
 const app = createApp(App)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
