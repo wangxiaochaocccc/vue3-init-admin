@@ -1,6 +1,6 @@
 import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
-import { setItem, getItem } from '@/utils/storage'
+import { setItem, getItem, clearAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant/index'
 import router from '@/router/index'
 export default {
@@ -40,6 +40,12 @@ export default {
       const res = await getUserInfo()
       this.commit('user/setUserInfo', res)
       return res
+    },
+    loginout () {
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      clearAllItem()
+      router.push('/login')
     }
   }
 }

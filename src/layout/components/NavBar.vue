@@ -16,7 +16,7 @@
             <router-link to="/">
               <el-dropdown-item>课程主页</el-dropdown-item>
             </router-link>
-            <el-dropdown-item divided>退出登录</el-dropdown-item>
+            <el-dropdown-item divided @click="loginout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -25,7 +25,12 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex'
 
+const store = useStore()
+const loginout = () => {
+  store.dispatch('user/loginout')
+}
 </script>
 <style lang='scss'>
 .nav-bar {

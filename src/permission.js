@@ -12,7 +12,6 @@ router.beforeEach(async (to, from, next) => {
       next('/')
     } else {
       if (!store.getters.hasUserInfo) {
-        console.log(11122)
         await store.dispatch('user/getUserInfo')
       }
       next()
