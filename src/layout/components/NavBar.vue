@@ -1,8 +1,7 @@
 <template>
   <div class='nav-bar'>
-    <div class="hamburger-box">
-      <Hamburger class="hamburger"></Hamburger>
-    </div>
+    <Hamburger class="hamburger"></Hamburger>
+    <Breadcrumb class="breadcrumb"></Breadcrumb>
     <div class="right-container">
       <el-dropdown trigger="click" class="dropdown-container">
         <div class="avatar-container">
@@ -30,6 +29,7 @@
 <script setup>
 import { useStore } from 'vuex'
 import Hamburger from '@/components/hamburger/index.vue'
+import Breadcrumb from '../../components/breadcrumb/index.vue'
 
 const store = useStore()
 const loginout = () => {
@@ -42,7 +42,7 @@ const loginout = () => {
   height: 50px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
-  .hamburger-box {
+  .hamburger {
     height: 100%;
     line-height: 50px;
     cursor: pointer;
@@ -52,6 +52,12 @@ const loginout = () => {
     &:hover {
       background: rgba(0, 0, 0, .1);
     }
+  }
+
+  .breadcrumb {
+    height: 50px;
+    line-height: 50px;
+    float: left;
   }
 
   .right-container {
