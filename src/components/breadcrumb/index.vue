@@ -1,9 +1,11 @@
 <template>
   <el-breadcrumb class="breadcrumb" separator="/">
-    <el-breadcrumb-item v-for="(item, index) in breadcrumb" :key="item.path">
-      <span class="no-redirect" v-if="index === breadcrumb.length - 1">{{ item.meta.title }}</span>
-      <span class="redirect" v-else @click="lintTOHandle(item)">{{ item.meta.title }}</span>
-    </el-breadcrumb-item>
+    <transition-group name="breadcrumb">
+      <el-breadcrumb-item v-for="(item, index) in breadcrumb" :key="item.path">
+        <span class="no-redirect" v-if="index === breadcrumb.length - 1">{{ item.meta.title }}</span>
+        <span class="redirect" v-else @click="lintTOHandle(item)">{{ item.meta.title }}</span>
+      </el-breadcrumb-item>
+    </transition-group>
   </el-breadcrumb>
 </template>
 
@@ -32,6 +34,7 @@ const lintTOHandle = item => {
 </script>
 <style lang='scss'>
 .breadcrumb {
+  position: relative;
   display: inline-block;
   font-size: 14px;
 
