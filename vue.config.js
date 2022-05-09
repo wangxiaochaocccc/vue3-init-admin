@@ -31,5 +31,6 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
+    config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js')
   }
 }
