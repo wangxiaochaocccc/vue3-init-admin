@@ -1,7 +1,8 @@
 <template>
   <div class='login-container'>
     <el-form ref="formRef" class="form-container" :model="loginForm" :rules="loginRules">
-      <h3>用户登录</h3>
+      <h3>{{ $t('msg.login.title') }}</h3>
+      <lang-select class="lang-select"></lang-select>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon="user"></svg-icon>
@@ -18,7 +19,8 @@
           <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'"></svg-icon>
         </span>
       </el-form-item>
-      <el-button :loading="loading" @click="handleLogin" type="primary" style="width: 100%; margin-bottom: 30px;">登录
+      <el-button :loading="loading" @click="handleLogin" type="primary" style="width: 100%; margin-bottom: 30px;">
+        {{ $t('msg.login.loginBtn') }}
       </el-button>
     </el-form>
   </div>
@@ -27,26 +29,33 @@
 
 <script setup>
 import SvgIcon from '../../components/SvgIcon/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
 import { reactive, ref } from 'vue'
 import { passwordRule } from './rule'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+// import { watchSwitchLang } from '@/utils/i18n'
 // 数据源
 const loginForm = reactive({
   username: 'super-admin',
   password: '123456'
 })
 
+// watchSwitchLang(() => {
+//   loginForm.value.validate()
+// })
 // 校验规则
+const i18n = useI18n()
 const loginRules = reactive({
   username: [{
     required: true,
     trigger: 'blur',
-    message: '用户名为必填项'
+    message: i18n.t('msg.login.usernameRule')
   }],
   password: [{
     required: true,
     trigger: 'blur',
-    message: '请输入密码',
+    message: i18n.t('msg.login.passwordRule'),
     validator: passwordRule()
   }]
 })
@@ -90,6 +99,12 @@ const handleLogin = () => {
       text-align: center;
       color: #fff;
       margin-bottom: 20px;
+    }
+
+    .lang-select {
+      position: absolute;
+      right: 35px;
+      top: 160px;
     }
 
     .el-form-item {
