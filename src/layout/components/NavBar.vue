@@ -3,6 +3,7 @@
     <Hamburger class="hamburger"></Hamburger>
     <Breadcrumb class="breadcrumb"></Breadcrumb>
     <div class="right-container">
+      <lang-select class="right-container-menu"></lang-select>
       <el-dropdown trigger="click" class="dropdown-container">
         <div class="avatar-container">
           <el-avatar shape="square" :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
@@ -30,7 +31,7 @@
 import { useStore } from 'vuex'
 import Hamburger from '@/components/hamburger/index.vue'
 import Breadcrumb from '../../components/breadcrumb/index.vue'
-
+import LangSelect from '@/components/LangSelect/index.vue'
 const store = useStore()
 const loginout = () => {
   store.dispatch('user/logout')
@@ -66,6 +67,11 @@ const loginout = () => {
     height: 100%;
     float: right;
     padding-right: 20px;
+
+    .right-container-menu {
+      display: inline-block;
+      padding: 0 19px 0 0;
+    }
 
     .dropdown-container {
       cursor: pointer;

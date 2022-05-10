@@ -8,7 +8,8 @@ const getters = {
   },
   userInfo: state => state.user.userInfo,
   cssVar: state => Variable,
-  sidebarOpened: state => state.app.sideBarOpened
+  sidebarOpened: state => state.app.sideBarOpened,
+  language: state => state.app.language
 }
 
 export default getters
