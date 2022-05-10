@@ -1,7 +1,7 @@
 <template>
   <el-dropdown class="international" trigger="click" @command="handleLangClick">
     <div>
-      <el-tooltip class="box-item" effect="dark" content="国际化">
+      <el-tooltip class="box-item" :effect="effect" content="国际化">
         <el-button>
           <svg-icon icon="language"></svg-icon>
         </el-button>
@@ -17,12 +17,22 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, defineProps } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 const store = useStore()
 
+// tooptip主题
+defineProps({
+  effect: {
+    type: String,
+    default: 'dark',
+    validator: function (value) {
+      return ['dark', 'light'].indexOf(value) !== -1
+    }
+  }
+})
 const language = computed(() => {
   return store.getters.language
 })
