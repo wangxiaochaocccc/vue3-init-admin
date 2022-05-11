@@ -10,7 +10,7 @@ export default {
   mutations: {
     setThemeColor (state, newColor) {
       state.mainColor = newColor
-      state.variables.menubg = newColor
+      state.variables.menuBg = newColor
       setItem(MAIN_COLOR, newColor)
     }
   }
