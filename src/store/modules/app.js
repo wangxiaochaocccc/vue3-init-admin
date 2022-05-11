@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state: () => ({
     sideBarOpened: true,
-    language: getItem(LANG) || ''
+    language: getItem(LANG) || 'zh'
   }),
   mutations: {
     triggerSideBarOpened (state) {
