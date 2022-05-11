@@ -3,7 +3,8 @@
     <Hamburger class="hamburger"></Hamburger>
     <Breadcrumb class="breadcrumb"></Breadcrumb>
     <div class="right-container">
-      <theme-select></theme-select>
+      <screen-full class="right-container-menu"></screen-full>
+      <theme-select class="right-container-menu"></theme-select>
       <lang-select class="right-container-menu"></lang-select>
       <el-dropdown trigger="click" class="dropdown-container">
         <div class="avatar-container">
@@ -34,6 +35,7 @@ import Hamburger from '@/components/hamburger/index.vue'
 import Breadcrumb from '../../components/breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
+import ScreenFull from '@/components/ScreenFull/index.vue'
 const store = useStore()
 const loginout = () => {
   store.dispatch('user/logout')
