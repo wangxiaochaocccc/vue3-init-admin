@@ -1,11 +1,12 @@
 <template>
   <!-- <i v-if="icon.includes('el-icon')" class="sub-el-icon" :class="icon"></i> -->
   <svg-icon :icon="icon"></svg-icon>
-  <span>{{ title }}</span>
+  <span>{{ genarateTitle(title) }}</span>
 </template>
 
 <script setup>
 import { defineProps } from 'vue'
+import { genarateTitle } from '@/utils/i18n'
 defineProps({
   title: {
     type: String,
