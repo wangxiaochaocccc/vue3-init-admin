@@ -1,6 +1,6 @@
 <template>
   <div class='app-container' :class="[$store.getters.sidebarOpened ? 'openSideBar' : 'hideSidebar']">
-    <side-bar class="sidebar-container" :style="{ background: Variable.menuBg }"></side-bar>
+    <side-bar class="sidebar-container" :style="{ background: $store.getters.mainColor }"></side-bar>
     <div class="main-container">
       <div class="nav-bar-container">
         <nav-bar></nav-bar>
@@ -14,7 +14,7 @@
 import SideBar from '@/layout/sidebar'
 import NavBar from '@/layout/components/NavBar.vue'
 import AppMain from '@/layout/components/AppMain.vue'
-import Variable from '@/assets/styles/variable.scss'
+// import Variable from '@/assets/styles/variable.scss'
 </script>
 <style lang='scss'>
 @import '~@/assets/styles/mixin.scss';
