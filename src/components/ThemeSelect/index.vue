@@ -11,11 +11,17 @@
       <el-dropdown-item command="color">{{ $t('msg.theme.themeColorChange') }}</el-dropdown-item>
     </template>
   </el-dropdown>
+  <select-color v-model="selectColorVisible"></select-color>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import SelectColor from './components/SelectColor.vue'
 
-const handleSetTheme = () => { }
+const selectColorVisible = ref(false)
+const handleSetTheme = () => {
+  selectColorVisible.value = true
+}
 </script>
 <style lang='scss'>
 .theme {
