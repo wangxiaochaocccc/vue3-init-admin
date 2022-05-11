@@ -1,5 +1,9 @@
 <template>
   <router-view />
 </template>
-
-<style lang="scss"></style>
+<script setup>
+import { getOriginStyle } from '@/utils/theme.js'
+getOriginStyle()
+</script>
+<style lang="scss">
+</style>
