@@ -2,7 +2,7 @@
   <div class="tags-view-container">
     <router-link
       class="tags-view-item"
-      v-for="item in $store.getters.tagsViewList"
+      v-for="(item, index) in $store.getters.tagsViewList"
       :key="item.fullPath"
       :to="{ path: item.fullPath }"
       :class="isActived(item) ? 'active' : ''"
@@ -10,22 +10,44 @@
         backgroundColor: isActived(item) ? $store.getters.mainColor : '',
         borderColor: isActived(item) ? $store.getters.mainColor : ''
       }"
+      @contextmenu.prevent="openMenu($event, index)"
     >
       {{ item.title }}
       <el-icon class="el-icon-close" v-show="!isActived(item)">
         <Close />
       </el-icon>
     </router-link>
+    <context-menu
+      v-show="isShowMenu"
+      :index="selectedIndex"
+      :style="menuPosition"
+    />
   </div>
 </template>
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+import ContextMenu from './contentmenu.vue'
 
 const route = useRoute()
 // 判断是否被选中
 const isActived = (item) => {
   return item.path === route.path
+}
+// 右键
+const isShowMenu = ref(false)
+const selectedIndex = ref(null)
+const menuPosition = ref({
+  top: '',
+  left: ''
+})
+const openMenu = (e, index) => {
+  const { x, y } = e
+  menuPosition.value.top = y + 'px'
+  menuPosition.value.left = x + 'px'
+  isShowMenu.value = true
+  selectedIndex.value = index
 }
 </script>
 <style lang="scss" scoped>
