@@ -19,7 +19,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { generateMenus, filterRoutes } from '@/utils/router'
+import { filterRoutes } from '@/utils/router'
+import { generateRoutes } from './fuse'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
 
@@ -27,7 +28,7 @@ import Fuse from 'fuse.js'
 const router = useRouter()
 const searchPool = computed(() => {
   const filterRoutesArr = filterRoutes(router.getRoutes())
-  return generateMenus(filterRoutesArr)
+  return generateRoutes(filterRoutesArr)
 })
 // 模糊搜索 fuse配置
 const fuse = new Fuse(searchPool.value, {
@@ -58,7 +59,9 @@ const handleShowSearch = () => {
 // 搜索数据
 const searchVal = ref('')
 // 获取下拉框内容
-const querySearch = () => {}
+const querySearch = (query) => {
+  console.log(fuse.search(query))
+}
 </script>
 <style lang="scss" scoped>
 .header-search {
