@@ -18,7 +18,7 @@ service.interceptors.request.use(
       }
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
-    config.headers.icode = 'F7CEF22D3DFD9445'
+    config.headers.icode = '29B2BFDCDFB2C70F'
     return config
   }
 )

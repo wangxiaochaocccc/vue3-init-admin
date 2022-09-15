@@ -8,7 +8,7 @@
       <lang-select class="right-container-menu"></lang-select>
       <el-dropdown trigger="click" class="dropdown-container">
         <div class="avatar-container">
-          <el-avatar shape="square" :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
+          <el-avatar shape="square" :size="40" src="/logo.jpeg"></el-avatar>
           <el-icon>
             <tools />
           </el-icon>
