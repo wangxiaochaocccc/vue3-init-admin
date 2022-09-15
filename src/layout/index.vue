@@ -1,9 +1,16 @@
 <template>
-  <div class='app-container' :class="[$store.getters.sidebarOpened ? 'openSideBar' : 'hideSidebar']">
-    <side-bar class="sidebar-container" :style="{ background: $store.getters.mainColor }"></side-bar>
+  <div
+    class="app-container"
+    :class="[$store.getters.sidebarOpened ? 'openSideBar' : 'hideSidebar']"
+  >
+    <side-bar
+      class="sidebar-container"
+      :style="{ background: $store.getters.mainColor }"
+    ></side-bar>
     <div class="main-container">
       <div class="nav-bar-container">
         <nav-bar></nav-bar>
+        <tags-view />
       </div>
       <app-main></app-main>
     </div>
@@ -14,9 +21,10 @@
 import SideBar from '@/layout/sidebar'
 import NavBar from '@/layout/components/NavBar.vue'
 import AppMain from '@/layout/components/AppMain.vue'
+import TagsView from '@/components/TagsView/index.vue'
 // import Variable from '@/assets/styles/variable.scss'
 </script>
-<style lang='scss'>
+<style lang="scss">
 @import '~@/assets/styles/mixin.scss';
 @import '~@/assets/styles/variable.scss';
 
@@ -32,7 +40,7 @@ import AppMain from '@/layout/components/AppMain.vue'
     right: 0;
     z-index: 9;
     width: calc(100% - #{$sideBarWidth});
-    transition: width .28s;
+    transition: width 0.28s;
   }
 }
 
