@@ -13,7 +13,15 @@
       default-first-option
       placeholder="Search"
       :remote-method="querySearch"
-    ></el-select>
+      @change="handleChangeSelected"
+    >
+      <el-option
+        v-for="item in searchArr"
+        :key="item.item.path"
+        :label="item.item.title.join('>')"
+        :value="item.item"
+      />
+    </el-select>
   </div>
 </template>
 
@@ -50,7 +58,6 @@ const fuse = new Fuse(searchPool.value, {
     }
   ]
 })
-console.log(fuse)
 // 是否展示下拉
 const isShow = ref(false)
 const handleShowSearch = () => {
@@ -59,8 +66,13 @@ const handleShowSearch = () => {
 // 搜索数据
 const searchVal = ref('')
 // 获取下拉框内容
+const searchArr = ref([])
 const querySearch = (query) => {
-  console.log(fuse.search(query))
+  searchArr.value = fuse.search(query)
+}
+// 点击搜索出来的结果
+const handleChangeSelected = (val) => {
+  router.push(val.path)
 }
 </script>
 <style lang="scss" scoped>
