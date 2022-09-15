@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { filterRoutes } from '@/utils/router'
 import { generateRoutes } from './fuse'
 import { useRouter } from 'vue-router'
@@ -62,6 +62,24 @@ const fuse = new Fuse(searchPool.value, {
 const isShow = ref(false)
 const handleShowSearch = () => {
   isShow.value = !isShow.value
+}
+// 监听isShow
+watch(
+  () => isShow,
+  (val) => {
+    if (val) {
+      document.body.addEventListener('click', onClose)
+    } else {
+      document.body.removeEventListener('click', onClose)
+    }
+  }
+)
+// 关闭搜索框
+const headerSearchSelectRef = ref(null)
+const onClose = () => {
+  headerSearchSelectRef.value.blur()
+  isShow.value = false
+  searchArr.value = []
 }
 // 搜索数据
 const searchVal = ref('')
