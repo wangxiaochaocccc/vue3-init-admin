@@ -18,8 +18,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
+import { ref, computed } from 'vue'
+import { generateMenus, filterRoutes } from '@/utils/router'
+import { useRouter } from 'vue-router'
+// 数据源
+const router = useRouter()
+const searchPool = computed(() => {
+  const filterRoutesArr = filterRoutes(router.getRoutes())
+  return generateMenus(filterRoutesArr)
+})
+console.log(searchPool.value)
 // 是否展示下拉
 const isShow = ref(false)
 const handleShowSearch = () => {
