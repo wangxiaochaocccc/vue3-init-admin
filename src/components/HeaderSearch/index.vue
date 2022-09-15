@@ -31,33 +31,38 @@ import { filterRoutes } from '@/utils/router'
 import { generateRoutes } from './fuse'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
+import { watchSwitchLanguage } from '@/utils/i18n'
 
 // 数据源
 const router = useRouter()
-const searchPool = computed(() => {
+let searchPool = computed(() => {
   const filterRoutesArr = filterRoutes(router.getRoutes())
   return generateRoutes(filterRoutesArr)
 })
 // 模糊搜索 fuse配置
-const fuse = new Fuse(searchPool.value, {
-  // 是否按优先级进行排序
-  shouldSort: true,
-  // 匹配长度超过这个值的才会被认为是匹配的
-  minMatchCharLength: 1,
-  // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
-  // name：搜索的键
-  // weight：对应的权重
-  keys: [
-    {
-      name: 'title',
-      weight: 0.7
-    },
-    {
-      name: 'path',
-      weight: 0.3
-    }
-  ]
-})
+let fuse
+const initFuse = (searchPool) => {
+  fuse = new Fuse(searchPool, {
+    // 是否按优先级进行排序
+    shouldSort: true,
+    // 匹配长度超过这个值的才会被认为是匹配的
+    minMatchCharLength: 1,
+    // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+    // name：搜索的键
+    // weight：对应的权重
+    keys: [
+      {
+        name: 'title',
+        weight: 0.7
+      },
+      {
+        name: 'path',
+        weight: 0.3
+      }
+    ]
+  })
+}
+initFuse(searchPool.value)
 // 是否展示下拉
 const isShow = ref(false)
 const handleShowSearch = () => {
@@ -92,6 +97,14 @@ const querySearch = (query) => {
 const handleChangeSelected = (val) => {
   router.push(val.path)
 }
+// 国际化处理
+watchSwitchLanguage(() => {
+  searchPool = computed(() => {
+    const filterRoutesArr = filterRoutes(router.getRoutes())
+    return generateRoutes(filterRoutesArr)
+  })
+  initFuse(searchPool.value)
+})
 </script>
 <style lang="scss" scoped>
 .header-search {
