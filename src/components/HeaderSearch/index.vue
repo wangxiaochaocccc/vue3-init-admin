@@ -21,13 +21,35 @@
 import { ref, computed } from 'vue'
 import { generateMenus, filterRoutes } from '@/utils/router'
 import { useRouter } from 'vue-router'
+import Fuse from 'fuse.js'
+
 // 数据源
 const router = useRouter()
 const searchPool = computed(() => {
   const filterRoutesArr = filterRoutes(router.getRoutes())
   return generateMenus(filterRoutesArr)
 })
-console.log(searchPool.value)
+// 模糊搜索 fuse配置
+const fuse = new Fuse(searchPool.value, {
+  // 是否按优先级进行排序
+  shouldSort: true,
+  // 匹配长度超过这个值的才会被认为是匹配的
+  minMatchCharLength: 1,
+  // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+  // name：搜索的键
+  // weight：对应的权重
+  keys: [
+    {
+      name: 'title',
+      weight: 0.7
+    },
+    {
+      name: 'path',
+      weight: 0.3
+    }
+  ]
+})
+console.log(fuse)
 // 是否展示下拉
 const isShow = ref(false)
 const handleShowSearch = () => {
