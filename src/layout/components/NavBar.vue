@@ -3,6 +3,7 @@
     <Hamburger class="hamburger"></Hamburger>
     <Breadcrumb class="breadcrumb"></Breadcrumb>
     <div class="right-container">
+      <header-search class="right-container-menu"></header-search>
       <screen-full class="right-container-menu"></screen-full>
       <theme-select class="right-container-menu"></theme-select>
       <lang-select class="right-container-menu"></lang-select>
@@ -36,6 +37,7 @@ import Breadcrumb from '../../components/breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
+import HeaderSearch from '@/components/HeaderSearch/index.vue'
 const store = useStore()
 const loginout = () => {
   store.dispatch('user/logout')
