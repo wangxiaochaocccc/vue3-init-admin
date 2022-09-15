@@ -9,7 +9,7 @@ import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { isTag } from '@/utils/tags'
 import { useStore } from 'vuex'
-import { genarateTitle } from '@/utils/i18n'
+import { genarateTitle, watchSwitchLanguage } from '@/utils/i18n'
 
 const store = useStore()
 const route = useRoute()
@@ -45,6 +45,20 @@ watch(
   },
   { immediate: true }
 )
+
+// 国际化
+
+watchSwitchLanguage(() => {
+  store.getters.tagsViewList.forEach((route, index) => {
+    store.commit('app/changeTagsView', {
+      index,
+      tag: {
+        ...route,
+        title: getTitle(route)
+      }
+    })
+  })
+})
 </script>
 <style lang="scss">
 .app-main {
