@@ -1,6 +1,12 @@
 <template>
   <div class="app-main">
-    <router-view></router-view>
+    <router-view v-slot="{ Component, route }">
+      <transition name="route-transition" mode="out-in">
+        <keep-alive>
+          <component :is="Component" :key="route.path" />
+        </keep-alive>
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -64,8 +70,8 @@ watchSwitchLanguage(() => {
 .app-main {
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px);
-  padding: 60px 20px 20px 20px;
+  height: calc(100vh - 50px - 43px);
+  padding: 104px 20px 20px 20px;
   box-sizing: border-box;
   overflow: hidden;
 }
