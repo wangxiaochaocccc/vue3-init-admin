@@ -45,9 +45,9 @@ import TagsView from '@/components/TagsView/index.vue'
 }
 
 .hideSidebar .nav-bar-container {
-  width: calc(100% - #{$hideSideBarWidth});
+  width: 100%;
 }
-// .main-container {
-//   position: absolute;
-// }
+.hideSidebar .main-container {
+  margin-left: 54px !important;
+}
 </style>
