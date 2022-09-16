@@ -1,8 +1,9 @@
 <template>
-  <div class='nav-bar'>
+  <div class="nav-bar">
     <Hamburger class="hamburger"></Hamburger>
     <Breadcrumb class="breadcrumb"></Breadcrumb>
     <div class="right-container">
+      <guide class="right-container-menu" />
       <header-search class="right-container-menu"></header-search>
       <screen-full class="right-container-menu"></screen-full>
       <theme-select class="right-container-menu"></theme-select>
@@ -22,7 +23,9 @@
             <router-link to="/">
               <el-dropdown-item>课程主页</el-dropdown-item>
             </router-link>
-            <el-dropdown-item divided @click="loginout">退出登录</el-dropdown-item>
+            <el-dropdown-item divided @click="loginout">
+              退出登录
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -38,12 +41,13 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import Guide from '@/components/Guide/index.vue'
 const store = useStore()
 const loginout = () => {
   store.dispatch('user/logout')
 }
 </script>
-<style lang='scss'>
+<style lang="scss">
 .nav-bar {
   width: 100%;
   height: 50px;
@@ -53,11 +57,11 @@ const loginout = () => {
     height: 100%;
     line-height: 50px;
     cursor: pointer;
-    transition: background .5s;
+    transition: background 0.5s;
     float: left;
 
     &:hover {
-      background: rgba(0, 0, 0, .1);
+      background: rgba(0, 0, 0, 0.1);
     }
   }
 
