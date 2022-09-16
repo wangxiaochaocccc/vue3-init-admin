@@ -1,14 +1,21 @@
 <template>
-  <el-dropdown v-bind="$attrs" trigger="click" class="theme" @command="handleSetTheme">
+  <el-dropdown
+    v-bind="$attrs"
+    trigger="click"
+    class="theme"
+    @command="handleSetTheme"
+  >
     <div>
       <el-tooltip :content="$t('msg.theme.themeChange')">
         <el-button>
-          <svg-icon icon="change-theme"></svg-icon>
+          <svg-icon id="guide-theme" icon="change-theme"></svg-icon>
         </el-button>
       </el-tooltip>
     </div>
     <template #dropdown>
-      <el-dropdown-item command="color">{{ $t('msg.theme.themeColorChange') }}</el-dropdown-item>
+      <el-dropdown-item command="color">
+        {{ $t('msg.theme.themeColorChange') }}
+      </el-dropdown-item>
     </template>
   </el-dropdown>
   <select-color v-model="selectColorVisible"></select-color>
@@ -23,7 +30,7 @@ const handleSetTheme = () => {
   selectColorVisible.value = true
 }
 </script>
-<style lang='scss'>
+<style lang="scss">
 .theme {
   .el-button {
     border: none;

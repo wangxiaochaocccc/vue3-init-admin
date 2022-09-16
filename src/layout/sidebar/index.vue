@@ -1,21 +1,19 @@
 <template>
-  <div class="side-bar-container">
+  <div class="side-bar-container" id="guide-sidebar">
     <div class="logo-conatiner">
-      <el-avatar :size="44" shape="square" src="/logo.jpeg">
-      </el-avatar>
+      <el-avatar :size="44" shape="square" src="/logo.jpeg"></el-avatar>
       <div class="title" v-if="$store.getters.sidebarOpened">my-admin</div>
     </div>
     <el-scrollbar>
       <side-bar></side-bar>
     </el-scrollbar>
-
   </div>
 </template>
 
 <script setup>
 import SideBar from './SideBar.vue'
 </script>
-<style lang='scss'>
+<style lang="scss">
 .logo-conatiner {
   height: 44px;
   padding: 10px 0 22px;

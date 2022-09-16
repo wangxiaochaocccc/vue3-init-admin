@@ -1,11 +1,11 @@
 <template>
-  <div class='hamburger-container' @click="triggerSideBar">
-    <svg-icon :icon="iconVal"></svg-icon>
+  <div class="hamburger-container" @click="triggerSideBar">
+    <svg-icon id="guide-hamburger" :icon="iconVal"></svg-icon>
   </div>
 </template>
 
 <script setup>
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -17,7 +17,7 @@ const triggerSideBar = () => {
   store.commit('app/triggerSideBarOpened')
 }
 </script>
-<style lang='scss'>
+<style lang="scss">
 .hamburger-container {
   padding: 0 16px;
 

@@ -1,6 +1,8 @@
 <template>
-  <div @click="onToggle">
-    <svg-icon :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"></svg-icon>
+  <div @click="onToggle" id="guide-full">
+    <svg-icon
+      :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
+    ></svg-icon>
   </div>
 </template>
 
@@ -32,5 +34,4 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

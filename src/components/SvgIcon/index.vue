@@ -1,8 +1,14 @@
 <template>
   <!-- 外部图标 -->
-  <div v-if="isExternal" class='svg-icon svg-external-icon' :style="externalIconStyle" :class="iconClassName"></div>
+  <div
+    v-if="isExternal"
+    class="svg-icon svg-external-icon"
+    :style="externalIconStyle"
+    :class="iconClassName"
+    v-bind="$attrs"
+  ></div>
   <!-- 内部图标 -->
-  <svg v-else class="svg-icon" :class="iconClassName">
+  <svg v-else class="svg-icon" :class="iconClassName" v-bind="$attrs">
     <use :xlink:href="iconIn" />
   </svg>
 </template>
@@ -34,7 +40,7 @@ const externalIconStyle = computed(() => ({
 // 内部图标
 const iconIn = computed(() => `#icon-${props.icon}`)
 </script>
-<style lang='scss'>
+<style lang="scss" scoped>
 .svg-icon {
   width: 1em;
   height: 1em;
@@ -42,7 +48,9 @@ const iconIn = computed(() => `#icon-${props.icon}`)
   fill: currentColor;
   overflow: hidden;
 }
-
+// .svg-container {
+//   display: inline;
+// }
 .svg-external-icon {
   background-color: currentColor;
   mask-size: cover !important;

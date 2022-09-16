@@ -1,6 +1,6 @@
 <template>
   <div class="header-search" :class="{ show: isShow }">
-    <div @click="handleShowSearch" class="svg-container">
+    <div @click="handleShowSearch" class="svg-container" id="guide-search">
       <svg-icon icon-class-name="search-icon" icon="search"></svg-icon>
     </div>
 

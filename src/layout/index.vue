@@ -10,7 +10,7 @@
     <div class="main-container">
       <div class="nav-bar-container">
         <nav-bar></nav-bar>
-        <tags-view />
+        <tags-view id="guide-tags" />
       </div>
       <app-main></app-main>
     </div>
@@ -35,11 +35,11 @@ import TagsView from '@/components/TagsView/index.vue'
   position: relative;
 
   .nav-bar-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
+    width: 100%;
     transition: width 0.28s;
   }
 }
@@ -47,4 +47,7 @@ import TagsView from '@/components/TagsView/index.vue'
 .hideSidebar .nav-bar-container {
   width: calc(100% - #{$hideSideBarWidth});
 }
+// .main-container {
+//   position: absolute;
+// }
 </style>

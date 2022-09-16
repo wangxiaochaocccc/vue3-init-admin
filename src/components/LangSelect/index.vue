@@ -3,14 +3,18 @@
     <div>
       <el-tooltip class="box-item" :effect="effect" content="国际化">
         <el-button>
-          <svg-icon icon="language"></svg-icon>
+          <svg-icon id="guide-lang" icon="language"></svg-icon>
         </el-button>
       </el-tooltip>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item :disabled="language === 'zh'" command="zh">中文</el-dropdown-item>
-        <el-dropdown-item :disabled="language === 'en'" command="en">English</el-dropdown-item>
+        <el-dropdown-item :disabled="language === 'zh'" command="zh">
+          中文
+        </el-dropdown-item>
+        <el-dropdown-item :disabled="language === 'en'" command="en">
+          English
+        </el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -39,13 +43,13 @@ const language = computed(() => {
 
 // 切换语言方法
 const i18n = useI18n()
-const handleLangClick = lang => {
+const handleLangClick = (lang) => {
   i18n.locale.value = lang
   store.commit('app/setLanguage', lang)
   ElMessage.success('切换成功')
 }
 </script>
-<style lang='scss'>
+<style lang="scss">
 .international {
   .el-button {
     border: none;

@@ -47,7 +47,7 @@ const loginout = () => {
   store.dispatch('user/logout')
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .nav-bar {
   width: 100%;
   height: 50px;
@@ -80,7 +80,10 @@ const loginout = () => {
 
     .right-container-menu {
       display: inline-block;
-      padding: 0 19px 0 0;
+      padding: 0 18px 0 0;
+      font-size: 24px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
     }
 
     .dropdown-container {
