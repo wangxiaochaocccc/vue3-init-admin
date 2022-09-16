@@ -13,7 +13,11 @@
       @contextmenu.prevent="openMenu($event, index)"
     >
       {{ item.title }}
-      <el-icon class="el-icon-close" v-show="!isActived(item)">
+      <el-icon
+        class="el-icon-close"
+        v-show="!isActived(item)"
+        @click.stop.prevent="handleRemove(index)"
+      >
         <Close />
       </el-icon>
     </router-link>
@@ -27,8 +31,9 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import ContextMenu from './contentmenu.vue'
+import { useStore } from 'vuex'
 
 const route = useRoute()
 // 判断是否被选中
@@ -37,7 +42,7 @@ const isActived = (item) => {
 }
 // 右键
 const isShowMenu = ref(false)
-const selectedIndex = ref(null)
+const selectedIndex = ref(0)
 const menuPosition = ref({
   top: '',
   left: ''
@@ -48,6 +53,26 @@ const openMenu = (e, index) => {
   menuPosition.value.left = x + 'px'
   isShowMenu.value = true
   selectedIndex.value = index
+}
+// 删除
+const store = useStore()
+const handleRemove = (index) => {
+  store.commit('app/removeTagsView', {
+    type: 'index',
+    index
+  })
+}
+// 监听是否关闭
+watch(isShowMenu, (val) => {
+  if (val) {
+    document.body.addEventListener('click', onClose)
+  } else {
+    document.body.removeEventListener('click', onClose)
+  }
+})
+// 关闭事件
+const onClose = () => {
+  isShowMenu.value = false
 }
 </script>
 <style lang="scss" scoped>
