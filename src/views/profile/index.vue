@@ -30,7 +30,7 @@ import Chapter from './components/Chapter.vue'
 import Author from './components/Author.vue'
 import { getFeature } from '@/api/user'
 import { ref } from 'vue'
-
+import { watchSwitchLanguage } from '@/utils/i18n'
 const activeTabs = ref('feature')
 
 const featureData = ref([])
@@ -39,6 +39,9 @@ const getFeatureData = async () => {
   featureData.value = res
 }
 getFeatureData()
+
+// 监听国际化切换
+watchSwitchLanguage(getFeatureData)
 </script>
 
 <style lang="scss" scoped>

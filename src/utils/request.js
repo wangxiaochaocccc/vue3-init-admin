@@ -16,8 +16,10 @@ service.interceptors.request.use(
         store.dispatch('user/logout')
         return Promise.reject(new Error('token 失效'))
       }
+      // config.headers.Accept_Language = store.getters.language
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
+    config.headers['Accept-Language'] = store.getters.language
     config.headers.icode = '29B2BFDCDFB2C70F'
     return config
   }

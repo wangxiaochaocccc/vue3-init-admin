@@ -59,6 +59,7 @@ const handleLangClick = (lang) => {
 
   .svg-icon {
     display: inline-block;
+    font-size: 24px;
     width: 20px;
     height: 20px;
   }
