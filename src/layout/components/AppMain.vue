@@ -70,7 +70,7 @@ watchSwitchLanguage(() => {
 .app-main {
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px - 43px);
+  min-height: calc(100vh - 50px - 43px);
   padding: 104px 20px 20px 20px;
   box-sizing: border-box;
   overflow: hidden;

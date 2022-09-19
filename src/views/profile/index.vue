@@ -2,9 +2,7 @@
   <div class="my-container">
     <el-row>
       <el-col :span="6">
-        <el-card class="user-card">
-          <project-card />
-        </el-card>
+        <project-card class="user-card" :featureData="featureData" />
       </el-col>
       <el-col :span="18">
         <el-card>
@@ -30,9 +28,17 @@ import ProjectCard from './components/ProjectCard.vue'
 import Feature from './components/Feature.vue'
 import Chapter from './components/Chapter.vue'
 import Author from './components/Author.vue'
+import { getFeature } from '@/api/user'
 import { ref } from 'vue'
 
 const activeTabs = ref('feature')
+
+const featureData = ref([])
+const getFeatureData = async () => {
+  const res = await getFeature()
+  featureData.value = res
+}
+getFeatureData()
 </script>
 
 <style lang="scss" scoped>
