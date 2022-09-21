@@ -33,10 +33,9 @@
             <el-tag>{{ $t('msg.excel.defaultRole') }}</el-tag>
           </div>
         </el-table-column>
-        <el-table-column
-          prop="openTime"
-          :label="$t('msg.excel.openTime')"
-        ></el-table-column>
+        <el-table-column :label="$t('msg.excel.openTime')" #default="{ row }">
+          {{ $filters.dateFilter(row.openTime) }}
+        </el-table-column>
         <el-table-column :label="$t('msg.excel.action')" width="200">
           <el-button type="primary" size="small">
             {{ $t('msg.excel.show') }}
