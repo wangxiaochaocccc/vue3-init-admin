@@ -38,14 +38,18 @@
         <el-table-column :label="$t('msg.excel.openTime')" #default="{ row }">
           {{ $filters.dateFilter(row.openTime) }}
         </el-table-column>
-        <el-table-column :label="$t('msg.excel.action')" width="200">
+        <el-table-column
+          :label="$t('msg.excel.action')"
+          width="200"
+          #default="{ row }"
+        >
           <el-button type="primary" size="small">
             {{ $t('msg.excel.show') }}
           </el-button>
           <el-button type="info" size="small">
             {{ $t('msg.excel.showRole') }}
           </el-button>
-          <el-button type="danger" size="small">
+          <el-button type="danger" size="small" @click="onRemoveUser(row)">
             {{ $t('msg.excel.remove') }}
           </el-button>
         </el-table-column>
@@ -65,13 +69,15 @@
 </template>
 
 <script setup>
-import { getManageList } from '@/api/user-manage'
+import { getManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLanguage } from '@/utils/i18n'
-
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 import { onActivated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const i18n = useI18n()
 // 基础数据
 const size = ref(2)
 const page = ref(1)
@@ -96,7 +102,22 @@ const handleCurrentChange = (value) => {
   page.value = value
   getData()
 }
-
+// 删除员工
+const onRemoveUser = (row) => {
+  ElMessageBox.confirm(
+    i18n.t('msg.excel.dialogTitle1') +
+      row.username +
+      i18n.t('msg.excel.dialogTitle2'),
+    {
+      type: 'warning'
+    }
+  ).then(async () => {
+    await deleteUser(row._id)
+    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+    // 重新渲染数据
+    getData()
+  })
+}
 // 监听语言变化
 watchSwitchLanguage(getData)
 // 点击上传
