@@ -5,7 +5,9 @@
         <el-button type="primary" @click="uploadExcel">
           {{ $t('msg.excel.importExcel') }}
         </el-button>
-        <el-button type="success">{{ $t('msg.excel.exportExcel') }}</el-button>
+        <el-button @click="handleExport" type="success">
+          {{ $t('msg.excel.exportExcel') }}
+        </el-button>
       </div>
     </el-card>
     <el-card>
@@ -65,10 +67,13 @@
         :total="total"
       ></el-pagination>
     </el-card>
+
+    <export-excel v-model="exportExcelVisible" />
   </div>
 </template>
 
 <script setup>
+import ExportExcel from './components/ExportExcel.vue'
 import { getManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLanguage } from '@/utils/i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -126,6 +131,12 @@ const uploadExcel = () => {
 }
 // 重新渲染数据
 onActivated(getData)
+
+// 导出excel
+const exportExcelVisible = ref(false)
+const handleExport = () => {
+  exportExcelVisible.value = true
+}
 </script>
 
 <style lang="scss" scoped>
