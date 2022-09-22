@@ -18,3 +18,8 @@ export const getHeaderRow = sheet => {
   }
   return headers
 }
+
+// 判断是否是excel格式
+export const isExcel = file => {
+  return /\.(xlsx|xls|csv)$/.test(file.name)
+}

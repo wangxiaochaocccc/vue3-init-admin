@@ -13,7 +13,12 @@
         class="input-upload"
         @change="handleInputChange"
       />
-      <div class="drop-upload">
+      <div
+        class="drop-upload"
+        @drop.stop.prevent="handleDorp"
+        @dragover.stop.prevent="handleDorpOver"
+        @dragenter.stop.prevent="handleDorpOver"
+      >
         <p>{{ $t('msg.uploadExcel.drop') }}</p>
       </div>
     </div>
@@ -21,9 +26,10 @@
 </template>
 
 <script setup>
+import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 import { read, utils } from 'xlsx'
-import { getHeaderRow } from './utils'
+import { getHeaderRow, isExcel } from './utils'
 
 const props = defineProps({
   beforeUpload: Function,
@@ -31,6 +37,28 @@ const props = defineProps({
 })
 
 const loading = ref(false)
+// 拖拽上传
+const handleDorp = (e) => {
+  if (loading.value) return
+
+  const files = e.dataTransfer.files
+  if (files.length !== 1) {
+    ElMessage.error('请选择一个文件')
+    return false
+  }
+
+  const rawFile = files[0]
+  if (!isExcel(rawFile)) {
+    ElMessage.error('上传文件格式必须是.xlsx/.xls/.csv')
+    return false
+  }
+  // 触发上传事件
+  upload(rawFile)
+}
+// 拖拽悬停时触发
+const handleDorpOver = (e) => {
+  e.dataTransfer.dropEffect = 'copy'
+}
 // 点击上传
 const inputRef = ref(null)
 const handleUploadClick = () => {
