@@ -68,7 +68,7 @@
 import { getManageList } from '@/api/user-manage'
 import { watchSwitchLanguage } from '@/utils/i18n'
 
-import { ref } from 'vue'
+import { onActivated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -103,6 +103,8 @@ watchSwitchLanguage(getData)
 const uploadExcel = () => {
   router.push('/user/import')
 }
+// 重新渲染数据
+onActivated(getData)
 </script>
 
 <style lang="scss" scoped>
