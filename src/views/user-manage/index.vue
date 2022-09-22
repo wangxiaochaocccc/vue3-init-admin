@@ -45,7 +45,7 @@
           width="250"
           #default="{ row }"
         >
-          <el-button type="primary" size="small">
+          <el-button type="primary" size="small" @click="handleLook(row._id)">
             {{ $t('msg.excel.show') }}
           </el-button>
           <el-button type="info" size="small">
@@ -136,6 +136,10 @@ onActivated(getData)
 const exportExcelVisible = ref(false)
 const handleExport = () => {
   exportExcelVisible.value = true
+}
+// 查看
+const handleLook = (id) => {
+  router.push(`/user/info/${id}`)
 }
 </script>
 
