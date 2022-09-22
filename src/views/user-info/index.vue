@@ -1,5 +1,69 @@
 <template>
-  <div>用户详情</div>
+  <div class="user-info-container">
+    <el-card>
+      <div class="print-box">
+        <el-button type="primary">{{ $t('msg.userInfo.print') }}</el-button>
+      </div>
+    </el-card>
+    <el-card>
+      <h2>{{ $t('msg.userInfo.title') }}</h2>
+      <div class="header">
+        <el-descriptions :column="2" border>
+          <el-descriptions-item :label="$t('msg.userInfo.name')">
+            {{ detailData.username }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.sex')">
+            {{ detailData.gender }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.nation')">
+            {{ detailData.nationality }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.mobile')">
+            {{ detailData.mobile }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.province')">
+            {{ detailData.address }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.date')">
+            {{ $filters.dateFilter(detailData.openTime) }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.remark')">
+            <el-tag v-for="(item, index) in detailData.remark" :key="index">
+              {{ item }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.address')">
+            {{ detailData.address }}
+          </el-descriptions-item>
+        </el-descriptions>
+        <el-image :src="detailData.avatar"></el-image>
+      </div>
+      <div class="body">
+        <el-descriptions direction="vertical" :column="1" border>
+          <el-descriptions-item :label="$t('msg.userInfo.experience')">
+            <ul>
+              <li v-for="(item, index) in detailData.experience" :key="index">
+                <span>
+                  {{ $filters.dateFilter(item.startTime) }}
+                  -------
+                  {{ $filters.dateFilter(item.endTime) }}
+                </span>
+                <span>{{ item.title }}</span>
+                <span>{{ item.desc }}</span>
+              </li>
+            </ul>
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.major')">
+            {{ detailData.major }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="$t('msg.userInfo.glory')">
+            {{ detailData.glory }}
+          </el-descriptions-item>
+        </el-descriptions>
+      </div>
+      <div class="footer">{{ $t('msg.userInfo.foot') }}</div>
+    </el-card>
+  </div>
 </template>
 
 <script setup>
@@ -22,4 +86,49 @@ getData()
 watchSwitchLanguage(getData)
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.user-info-container {
+  .el-card {
+    margin-bottom: 20px;
+    .print-box {
+      display: flex;
+      justify-content: flex-end;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .el-descriptions {
+      width: 100%;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      .el-image {
+        width: 187px;
+        border: 1px solid #ebeef5;
+        padding: 30px 20px;
+        border-left: 0;
+      }
+      .el-tag {
+        margin-right: 10px;
+      }
+    }
+    .body {
+      ul {
+        list-style: none;
+        li {
+          span {
+            margin-right: 62px;
+          }
+        }
+      }
+    }
+    .footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+</style>
