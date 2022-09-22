@@ -40,6 +40,7 @@ specifiers:
   vue: ^3.0.0
   vue-i18n: ^9.1.10
   vue-router: ^4.0.0-0
+  vue3-print-nb: ^0.1.4
   vuex: ^4.0.0-0
   xlsx: ^0.18.5
 
@@ -60,6 +61,7 @@ dependencies:
   vue: registry.npmmirror.com/vue/3.2.39
   vue-i18n: registry.npmmirror.com/vue-i18n/9.2.2_vue@3.2.39
   vue-router: registry.npmmirror.com/vue-router/4.1.5_vue@3.2.39
+  vue3-print-nb: registry.npmmirror.com/vue3-print-nb/0.1.4
   vuex: registry.npmmirror.com/vuex/4.0.2_vue@3.2.39
   xlsx: registry.npmmirror.com/xlsx/0.18.5
 
@@ -14279,6 +14281,14 @@ packages:
       '@vue/runtime-dom': registry.npmmirror.com/@vue/runtime-dom/3.2.39
       '@vue/server-renderer': registry.npmmirror.com/@vue/server-renderer/3.2.39_vue@3.2.39
       '@vue/shared': registry.npmmirror.com/@vue/shared/3.2.39
+
+  registry.npmmirror.com/vue3-print-nb/0.1.4:
+    resolution: {integrity: sha512-LExI7viEzplR6ZKQ2b+V4U0cwGYbVD4fut/XHvk3UPGlT5CcvIGs6VlwGp107aKgk6P8Pgx4rco3Rehv2lti3A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue3-print-nb/-/vue3-print-nb-0.1.4.tgz}
+    name: vue3-print-nb
+    version: 0.1.4
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.39
+    dev: false
 
   registry.npmmirror.com/vuex/4.0.2_vue@3.2.39:
     resolution: {integrity: sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuex/-/vuex-4.0.2.tgz}

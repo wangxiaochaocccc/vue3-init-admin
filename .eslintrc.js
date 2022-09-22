@@ -7,7 +7,7 @@ module.exports = {
   env: {
     // 在 node 环境下启动 ESLint 检测
     node: true,
-    "vue/setup-compiler-macros": true,
+    'vue/setup-compiler-macros': true
   },
   // ESLint 中基础配置需要继承的配置
   extends: ['plugin:vue/vue3-essential', '@vue/standard'],
@@ -25,7 +25,8 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    "indent": ["error", 2],
-    'vue/multi-word-component-names': 0
+    indent: ['error', 2],
+    'vue/multi-word-component-names': 0,
+    'space-before-function-paren': 0
   }
 }
