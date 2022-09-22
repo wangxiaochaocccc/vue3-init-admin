@@ -26,6 +26,7 @@ specifiers:
   eslint-plugin-promise: ^4.2.1
   eslint-plugin-standard: ^4.0.0
   eslint-plugin-vue: ^9.4.0
+  file-saver: 2.0.5
   fuse.js: ^6.4.6
   husky: ^7.0.1
   lint-staged: ^9.5.0
@@ -51,6 +52,7 @@ dependencies:
   dayjs: registry.npmmirror.com/dayjs/1.11.5
   driver.js: registry.npmmirror.com/driver.js/0.9.8
   element-plus: registry.npmmirror.com/element-plus/2.2.16_vue@3.2.39
+  file-saver: registry.npmmirror.com/file-saver/2.0.5
   fuse.js: registry.npmmirror.com/fuse.js/6.6.2
   md5: registry.npmmirror.com/md5/2.3.0
   rgb-hex: registry.npmmirror.com/rgb-hex/4.0.0
@@ -7213,6 +7215,12 @@ packages:
       schema-utils: registry.npmmirror.com/schema-utils/2.7.1
       webpack: registry.npmmirror.com/webpack/4.46.0
     dev: true
+
+  registry.npmmirror.com/file-saver/2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/file-saver/-/file-saver-2.0.5.tgz}
+    name: file-saver
+    version: 2.0.5
+    dev: false
 
   registry.npmmirror.com/file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz}
