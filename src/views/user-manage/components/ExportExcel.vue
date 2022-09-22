@@ -25,6 +25,7 @@ import { ref } from 'vue'
 import { watchSwitchLanguage } from '@/utils/i18n'
 import { getUserManageAllList } from '@/api/user-manage'
 import { USER_RELATIONS } from './utils'
+import { dateFilter } from '@/filters'
 
 const i18n = useI18n()
 
@@ -82,6 +83,9 @@ const formatJson = (headers, rows) => {
         const roles = item[headers[key]]
 
         return JSON.stringify(roles.map((role) => role.title))
+      }
+      if (headers[key] === 'openTime') {
+        return dateFilter(item[headers[key]])
       }
       return item[headers[key]]
     })
