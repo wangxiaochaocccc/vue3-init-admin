@@ -42,7 +42,7 @@
         </el-table-column>
         <el-table-column
           :label="$t('msg.excel.action')"
-          width="200"
+          width="250"
           #default="{ row }"
         >
           <el-button type="primary" size="small">
