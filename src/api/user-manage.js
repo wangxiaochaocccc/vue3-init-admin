@@ -9,3 +9,11 @@ export const getManageList = (data) => {
     params: data
   })
 }
+// 上传数据
+export const useBatchImport = (data) => {
+  return request({
+    url: '/user-manage/batch/import',
+    method: 'post',
+    data
+  })
+}
