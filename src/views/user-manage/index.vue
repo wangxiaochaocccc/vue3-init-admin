@@ -48,7 +48,7 @@
           <el-button type="primary" size="small" @click="handleLook(row._id)">
             {{ $t('msg.excel.show') }}
           </el-button>
-          <el-button type="info" size="small">
+          <el-button type="info" size="small" @click="handleRoleDialog(row)">
             {{ $t('msg.excel.showRole') }}
           </el-button>
           <el-button type="danger" size="small" @click="onRemoveUser(row)">
@@ -69,16 +69,18 @@
     </el-card>
 
     <export-excel v-model="exportExcelVisible" />
+    <role-vue v-model="roleVisible" :id="selectedId" @updateRole="getData" />
   </div>
 </template>
 
 <script setup>
 import ExportExcel from './components/ExportExcel.vue'
+import RoleVue from './components/role.vue'
 import { getManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLanguage } from '@/utils/i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
-import { onActivated, ref } from 'vue'
+import { onActivated, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -141,6 +143,16 @@ const handleExport = () => {
 const handleLook = (id) => {
   router.push(`/user/info/${id}`)
 }
+// 是否显示角色弹窗
+const roleVisible = ref(false)
+const selectedId = ref('')
+const handleRoleDialog = (row) => {
+  roleVisible.value = true
+  selectedId.value = row._id
+}
+watch(roleVisible, (val) => {
+  if (!val) selectedId.value = ''
+})
 </script>
 
 <style lang="scss" scoped>
@@ -158,6 +170,10 @@ const handleLook = (id) => {
     }
     .el-pagination {
       margin-top: 20px;
+    }
+    .el-tag {
+      margin-right: 8px;
+      margin-bottom: 8px;
     }
   }
 }
