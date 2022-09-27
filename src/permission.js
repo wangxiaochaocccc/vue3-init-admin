@@ -12,11 +12,18 @@ router.beforeEach(async (to, from, next) => {
       next('/')
     } else {
       if (!store.getters.hasUserInfo) {
-        await store.dispatch('user/getUserInfo')
+        const { permission } = await store.dispatch('user/getUserInfo')
+        const filterRoutes = await store.dispatch('permission/filterRoutes', permission.menus)
+        console.log(filterRoutes)
+        filterRoutes.forEach(item => {
+          router.addRoute(item)
+        })
+        // 添加完路由主动跳转
+        return next(to.path)
       }
       next()
     }
-  // 不存在token
+    // 不存在token
   } else {
     if (WhileList.indexOf(to.path) > -1) {
       next()
