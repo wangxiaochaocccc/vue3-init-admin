@@ -1,7 +1,8 @@
-import formula from '@/constant/formula.json'
-import rgbHex from 'rgb-hex'
 import color from 'css-color-function'
+import rgbHex from 'rgb-hex'
+import formula from '@/constant/formula.json'
 import axios from 'axios'
+
 /**
  * 写入新样式到 style
  * @param {*} elNewStyle  element-plus 的新样式
@@ -17,9 +18,9 @@ export const writeNewStyle = elNewStyle => {
  * 根据主色值，生成最新的样式表
  */
 export const generateNewStyle = async primaryColor => {
-  // 根据主色生成色值表
   const colors = generateColors(primaryColor)
-  let cssText = await getOriginStyle()
+  let cssText = await getOriginalStyle()
+
   // 遍历生成的样式表，在 CSS 的原样式中进行全局替换
   Object.keys(colors).forEach(key => {
     cssText = cssText.replace(
@@ -27,13 +28,15 @@ export const generateNewStyle = async primaryColor => {
       '$1' + colors[key]
     )
   })
+
   return cssText
 }
 
+/**
+ * 根据主色生成色值表
+ */
 export const generateColors = primary => {
-  if (!primary) {
-    return false
-  }
+  if (!primary) return
   const colors = {
     primary
   }
@@ -44,12 +47,14 @@ export const generateColors = primary => {
   return colors
 }
 
-// 获取当前element-plus的默认样式表
-
-export const getOriginStyle = async () => {
+/**
+ * 获取当前 element-plus 的默认样式表
+ */
+const getOriginalStyle = async () => {
   const version = require('element-plus/package.json').version
   const url = `https://unpkg.com/element-plus@${version}/dist/index.css`
   const { data } = await axios(url)
+  // 把获取到的数据筛选为原样式模板
   return getStyleTemplate(data)
 }
 

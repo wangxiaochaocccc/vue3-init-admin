@@ -1,8 +1,19 @@
 <template>
-  <el-menu :default-active="activeMenu" class="el-menu-vertical-demo" :background-color="$store.getters.cssVar.menuBg"
-    :text-color="$store.getters.cssVar.menuText" :active-text-color="$store.getters.cssVar.menuActiveText"
-    :unique-opened="true" router :collapse="!$store.getters.sidebarOpened">
-    <side-bar-item v-for="item in routes" :key="item.path" :route="item"></side-bar-item>
+  <el-menu
+    :default-active="activeMenu"
+    class="el-menu-vertical-demo"
+    :background-color="$store.getters.cssVar.menuBg"
+    :text-color="$store.getters.cssVar.menuText"
+    :active-text-color="$store.getters.cssVar.menuActiveText"
+    :unique-opened="true"
+    router
+    :collapse="!$store.getters.sidebarOpened"
+  >
+    <side-bar-item
+      v-for="item in routes"
+      :key="item.path"
+      :route="item"
+    ></side-bar-item>
   </el-menu>
 </template>
 
@@ -24,5 +35,4 @@ const activeMenu = computed(() => {
 })
 console.log(routes.value)
 </script>
-<style lang='scss'>
-</style>
+<style lang="scss"></style>

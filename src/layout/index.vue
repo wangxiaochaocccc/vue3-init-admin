@@ -5,7 +5,8 @@
   >
     <side-bar
       class="sidebar-container"
-      :style="{ background: $store.getters.mainColor }"
+      id="guide-sidebar"
+      :style="{ background: $store.getters.cssVar.menuBg }"
     ></side-bar>
     <div class="main-container">
       <div class="nav-bar-container">

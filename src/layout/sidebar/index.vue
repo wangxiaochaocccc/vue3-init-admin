@@ -1,5 +1,5 @@
 <template>
-  <div class="side-bar-container" id="guide-sidebar">
+  <div>
     <div class="logo-conatiner">
       <el-avatar :size="44" shape="square" src="/logo.jpeg"></el-avatar>
       <div class="title" v-if="$store.getters.sidebarOpened">my-admin</div>

@@ -7,8 +7,8 @@
       :to="{ path: item.fullPath }"
       :class="isActived(item) ? 'active' : ''"
       :style="{
-        backgroundColor: isActived(item) ? $store.getters.mainColor : '',
-        borderColor: isActived(item) ? $store.getters.mainColor : ''
+        backgroundColor: isActived(item) ? $store.getters.cssVar.menuBg : '',
+        borderColor: isActived(item) ? $store.getters.cssVar.menuBg : ''
       }"
       @contextmenu.prevent="openMenu($event, index)"
     >
