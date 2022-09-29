@@ -2,7 +2,7 @@ import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem } from '@/utils/storage'
 import { TOKEN } from '@/constant/index'
-import router from '@/router/index'
+import router, { resetRouter } from '@/router/index'
 import { setTimeStamp } from '@/utils/auth'
 
 export default {
@@ -46,6 +46,7 @@ export default {
       return res
     },
     logout () {
+      resetRouter()
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
       // clearAllItem()

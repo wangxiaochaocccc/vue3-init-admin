@@ -5,6 +5,7 @@ import RoleListRouter from './modules/RoleList'
 import PermissionListRouter from './modules/PermissionList'
 import ArticleRouter from './modules/Article'
 import ArticleCreaterRouter from './modules/ArticleCreate'
+import store from '@/store'
 /**
  * 私有路由表
  */
@@ -57,5 +58,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: publicRoutes
 })
+
+// 重置路由表数据
+export const resetRouter = () => {
+  if (store.getters.userInfo?.permission?.menu) {
+    const menus = store.getters.userInfo.permission.menu
+    menus.forEach(item => {
+      router.removeRoute(item)
+    })
+  }
+}
 
 export default router
