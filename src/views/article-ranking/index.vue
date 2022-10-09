@@ -1,30 +1,27 @@
 <template>
   <div class="article-ranking-container">
+    <el-card class="header">
+      <span class="title">{{ $t('msg.article.dynamicTitle') }}</span>
+      <el-checkbox-group v-model="selectedData">
+        <el-checkbox
+          v-for="(item, index) in dynamicData"
+          :key="index"
+          :label="item.label"
+        ></el-checkbox>
+      </el-checkbox-group>
+    </el-card>
     <el-card>
       <el-table :data="tableData" border>
         <el-table-column
-          :label="$t('msg.article.ranking')"
-          prop="ranking"
-        ></el-table-column>
-        <el-table-column
-          :label="$t('msg.article.title')"
-          prop="title"
-        ></el-table-column>
-        <el-table-column
-          :label="$t('msg.article.author')"
-          prop="author"
-        ></el-table-column>
-        <el-table-column :label="$t('msg.article.publicDate')">
-          <template #default="{ row }">
+          v-for="(item, index) in renderData"
+          :key="index"
+          :label="item.label"
+          :prop="item.prop"
+        >
+          <template #default="{ row }" v-if="item.prop === 'publicDate'">
             {{ $filters.relativeTime(row.publicDate) }}
           </template>
-        </el-table-column>
-        <el-table-column
-          :label="$t('msg.article.desc')"
-          prop="desc"
-        ></el-table-column>
-        <el-table-column :label="$t('msg.article.action')">
-          <template #default>
+          <template #default="{}" v-else-if="item.prop === 'action'">
             <el-button type="primary" size="small">
               {{ $t('msg.article.show') }}
             </el-button>
@@ -51,7 +48,7 @@
 <script setup>
 import { ref } from 'vue'
 import { getArticleList } from '@/api/article'
-
+import { selectedData, dynamicData, renderData } from './dynamic/index'
 // 数据相关
 const tableData = ref([])
 const page = ref(1)
@@ -86,6 +83,19 @@ const handleCurrentChange = (currentPage) => {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+  }
+  .header {
+    margin-bottom: 20px;
+    ::v-deep .el-card__body {
+      display: flex;
+      align-items: center;
+    }
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      margin-right: 10px;
+    }
   }
 }
 </style>

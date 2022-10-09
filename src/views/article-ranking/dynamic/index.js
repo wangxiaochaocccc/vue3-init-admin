@@ -26,4 +26,6 @@ watch(selectedData, (val) => {
     return val.includes(item.label)
   })
   renderData.value.push(...res)
+}, {
+  immediate: true
 })
