@@ -78,7 +78,7 @@ const handleCurrentChange = (currentPage) => {
 }
 // 初始化拖拽
 onMounted(() => {
-  initSoreable()
+  initSoreable(tableData, getTableData)
 })
 </script>
 
