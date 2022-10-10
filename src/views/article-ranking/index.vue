@@ -21,11 +21,11 @@
           <template #default="{ row }" v-if="item.prop === 'publicDate'">
             {{ $filters.relativeTime(row.publicDate) }}
           </template>
-          <template #default="{}" v-else-if="item.prop === 'action'">
+          <template #default="{ row }" v-else-if="item.prop === 'action'">
             <el-button type="primary" size="small">
               {{ $t('msg.article.show') }}
             </el-button>
-            <el-button type="danger" size="small">
+            <el-button type="danger" size="small" @click="onRemove(row)">
               {{ $t('msg.article.remove') }}
             </el-button>
           </template>
@@ -47,9 +47,11 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { getArticleList } from '@/api/article'
+import { getArticleList, deleteArticle } from '@/api/article'
 import { selectedData, dynamicData, renderData } from './dynamic/index'
 import { tableRef, initSoreable } from './sorttable'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 // 数据相关
 const tableData = ref([])
 const page = ref(1)
@@ -80,6 +82,20 @@ const handleCurrentChange = (currentPage) => {
 onMounted(() => {
   initSoreable(tableData, getTableData)
 })
+// 删除功能
+const i18n = useI18n()
+const onRemove = (row) => {
+  ElMessageBox.confirm(
+    i18n.t('msg.article.dialogTitle1') +
+      row.title +
+      i18n.t('msg.article.dialogTitle2'),
+    { type: 'warning' }
+  ).then(async () => {
+    await deleteArticle(row._id)
+    ElMessage.success(i18n.t('msg.article.removeSuccess'))
+    getTableData()
+  })
+}
 </script>
 
 <style lang="scss" scoped>
