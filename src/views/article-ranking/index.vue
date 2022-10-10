@@ -22,7 +22,7 @@
             {{ $filters.relativeTime(row.publicDate) }}
           </template>
           <template #default="{ row }" v-else-if="item.prop === 'action'">
-            <el-button type="primary" size="small">
+            <el-button type="primary" size="small" @click="onShow(row)">
               {{ $t('msg.article.show') }}
             </el-button>
             <el-button type="danger" size="small" @click="onRemove(row)">
@@ -52,6 +52,9 @@ import { selectedData, dynamicData, renderData } from './dynamic/index'
 import { tableRef, initSoreable } from './sorttable'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 // 数据相关
 const tableData = ref([])
 const page = ref(1)
@@ -95,6 +98,10 @@ const onRemove = (row) => {
     ElMessage.success(i18n.t('msg.article.removeSuccess'))
     getTableData()
   })
+}
+// 查看
+const onShow = (row) => {
+  router.push(`/article/${row._id}`)
 }
 </script>
 
