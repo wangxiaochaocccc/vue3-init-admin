@@ -11,7 +11,7 @@
       </el-checkbox-group>
     </el-card>
     <el-card>
-      <el-table :data="tableData" border>
+      <el-table :data="tableData" border ref="tableRef">
         <el-table-column
           v-for="(item, index) in renderData"
           :key="index"
@@ -46,9 +46,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { getArticleList } from '@/api/article'
 import { selectedData, dynamicData, renderData } from './dynamic/index'
+import { tableRef, initSoreable } from './sorttable'
 // 数据相关
 const tableData = ref([])
 const page = ref(1)
@@ -75,6 +76,10 @@ const handleCurrentChange = (currentPage) => {
   page.value = currentPage
   getTableData()
 }
+// 初始化拖拽
+onMounted(() => {
+  initSoreable()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -97,5 +102,10 @@ const handleCurrentChange = (currentPage) => {
       margin-right: 10px;
     }
   }
+}
+:deep(.sortable-container) {
+  opacity: 0.6;
+  color: #fff !important;
+  background-color: #304156 !important;
 }
 </style>
