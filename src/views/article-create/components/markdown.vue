@@ -4,7 +4,9 @@
     <div id="markdown-box"></div>
     <!-- 底部按钮 -->
     <div class="bottom-box">
-      <el-button type="primary">{{ $t('msg.article.commit') }}</el-button>
+      <el-button type="primary" @click="onCommit">
+        {{ $t('msg.article.commit') }}
+      </el-button>
     </div>
   </div>
 </template>
@@ -16,9 +18,16 @@ import '@toast-ui/editor/dist/i18n/zh-cn'
 import { useStore } from 'vuex'
 import { onMounted } from 'vue'
 import { watchSwitchLanguage } from '@/utils/i18n'
+import { createMarkdown } from './commit'
 
 const store = useStore()
 
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  }
+})
 // markdown实例
 let mk
 
@@ -46,6 +55,17 @@ watchSwitchLanguage(() => {
   initMarkdown()
   mk.setHTML(htmlStr)
 })
+
+const emits = defineEmits(['onSuccess'])
+// 提交
+const onCommit = async () => {
+  await createMarkdown({
+    title: props.title,
+    content: mk.getHTML()
+  })
+  mk.reset()
+  emits('onSuccess')
+}
 </script>
 <style lang="scss" scoped>
 .bottom-box {
