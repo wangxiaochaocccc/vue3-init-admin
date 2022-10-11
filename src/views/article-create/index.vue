@@ -11,7 +11,11 @@
       />
       <el-tabs v-model="activeName">
         <el-tab-pane :label="$t('msg.article.markdown')" name="markdown">
-          <markdown :title="title" @onSuccess="onSuccess" />
+          <markdown
+            :title="title"
+            @onSuccess="onSuccess"
+            :detail="detailData"
+          />
         </el-tab-pane>
         <el-tab-pane :label="$t('msg.article.richText')" name="editor">
           <rich-text />
@@ -25,10 +29,23 @@
 import markdown from './components/markdown.vue'
 import RichText from './components/rich-text.vue'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { articleDetail } from '@/api/article'
 
 const title = ref('')
 const activeName = ref('markdown')
 
+const route = useRoute()
+const articleId = route.params.id
+// 获取文章详情
+const detailData = ref({})
+const getArticleDetail = async () => {
+  detailData.value = await articleDetail(articleId)
+  title.value = detailData.value.title
+}
+if (articleId) {
+  getArticleDetail()
+}
 // 提交完成
 const onSuccess = () => {
   title.value = ''

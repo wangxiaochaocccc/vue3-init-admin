@@ -16,9 +16,9 @@ import MkEditor from '@toast-ui/editor'
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/i18n/zh-cn'
 import { useStore } from 'vuex'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { watchSwitchLanguage } from '@/utils/i18n'
-import { createMarkdown } from './commit'
+import { createMarkdown, editMarkdown } from './commit'
 
 const store = useStore()
 
@@ -26,6 +26,9 @@ const props = defineProps({
   title: {
     type: String,
     required: true
+  },
+  detail: {
+    type: Object
   }
 })
 // markdown实例
@@ -59,13 +62,31 @@ watchSwitchLanguage(() => {
 const emits = defineEmits(['onSuccess'])
 // 提交
 const onCommit = async () => {
-  await createMarkdown({
-    title: props.title,
-    content: mk.getHTML()
-  })
+  if (props.detail?._id) {
+    await editMarkdown({
+      id: props.detail._id,
+      title: props.title,
+      content: mk.getHTML()
+    })
+  } else {
+    await createMarkdown({
+      title: props.title,
+      content: mk.getHTML()
+    })
+  }
   mk.reset()
   emits('onSuccess')
 }
+// 监听props.detail
+watch(
+  () => props.detail,
+  (val) => {
+    if (val?.content) {
+      mk.setHTML(val.content)
+    }
+  },
+  { immediate: true }
+)
 </script>
 <style lang="scss" scoped>
 .bottom-box {
