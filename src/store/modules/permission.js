@@ -1,4 +1,4 @@
-import router, { publicRoutes, privateRoutes } from '@/router'
+import { publicRoutes, privateRoutes } from '@/router'
 export default {
   namespaced: true,
   state: () => ({
@@ -17,8 +17,8 @@ export default {
       menus.forEach(item => {
         routes.push(...privateRoutes.filter(route => route.name === item))
       })
-      // 添加404规则
-      router.push({
+      // 最后添加 不匹配路由进入 404
+      routes.push({
         path: '/:catchAll(.*)',
         redirect: '/404'
       })
