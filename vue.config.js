@@ -5,12 +5,15 @@ function resolve (dir) {
 }
 
 module.exports = {
+  publicPath: './',
+  outputDir: 'dist',
+  assetsDir: 'static',
   devServer: {
     // 配置反向代理
     proxy: {
-    // 当地址中有/api的时候会触发代理机制
+      // 当地址中有/api的时候会触发代理机制
       '/api': {
-      // 要代理的服务器地址  这里不用写 api
+        // 要代理的服务器地址  这里不用写 api
         target: 'https://api.imooc-admin.lgdsunday.club/',
         changeOrigin: true // 是否跨域
       }
@@ -32,5 +35,10 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
     config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js')
+    config.plugin('html').tap((args) => {
+      args[0].title = '通用管理后台'
+      args[0].favicon = resolve('./public/favicon.ico')
+      return args
+    })
   }
 }
