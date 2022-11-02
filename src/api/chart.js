@@ -8,3 +8,11 @@ export const getChartTrend = () => {
     url: '/chart/trend'
   })
 }
+/**
+ * 日历图示数据
+ */
+export const getChartCalendar = () => {
+  return request({
+    url: '/chart/calendar'
+  })
+}
