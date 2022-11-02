@@ -65,7 +65,6 @@ const getClassName = (date) => {
   if (amount > 0) {
     return 'profit'
   } else if (amount < 0) {
-    console.log(amount)
     return 'loss'
   }
   return ''
