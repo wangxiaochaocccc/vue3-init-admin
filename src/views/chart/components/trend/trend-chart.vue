@@ -5,7 +5,10 @@
 <script setup>
 import * as echarts from 'echarts'
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { watchSwitchLanguage } from '@/utils/i18n'
 
+const i18n = useI18n()
 const props = defineProps({
   data: {
     type: Object,
@@ -42,13 +45,13 @@ const renderChart = () => {
     // 图例配置
     legend: {
       // 图例数据
-      data: ['月累计收益', '日收益曲线'],
+      data: [i18n.t('msg.chart.monthIncome'), i18n.t('msg.chart.dayIncome')],
       // 位置
       right: 0
     },
     // 网格绘制位置
     grid: {
-      top: 20,
+      top: 40,
       right: 0,
       left: 0,
       bottom: 0,
@@ -74,14 +77,14 @@ const renderChart = () => {
       },
       // 刻度上展示的文字
       axisLabel: {
-        formatter: '{value}万元'
+        formatter: `{value} ${i18n.t('msg.chart.unit')}`
       }
     },
     // 图表类型（可以指定多个）
     series: [
       {
         // 图表名字，对应 legend.data[0]
-        name: '月累计收益',
+        name: i18n.t('msg.chart.monthIncome'),
         // 图表的类型
         type: 'bar',
         // 图表的数据
@@ -92,13 +95,13 @@ const renderChart = () => {
         tooltip: {
           // 展示内容
           valueFormatter: function (value) {
-            return value + '万元'
+            return value + i18n.t('msg.chart.unit')
           }
         }
       },
       {
         // 图表名字，对应 legend.data[0]
-        name: '日收益曲线',
+        name: i18n.t('msg.chart.dayIncome'),
         // 图表的类型
         type: 'line',
         color: '#6EC6D0',
@@ -109,7 +112,7 @@ const renderChart = () => {
         tooltip: {
           // 展示内容
           valueFormatter: function (value) {
-            return value + '万元'
+            return value + i18n.t('msg.chart.unit')
           }
         }
       }
@@ -117,6 +120,8 @@ const renderChart = () => {
   }
   mChart.setOption(options)
 }
+
+watchSwitchLanguage(renderChart)
 </script>
 
 <style lang="scss" scoped>
