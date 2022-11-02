@@ -2,7 +2,7 @@
   <el-card class="container">
     <el-row :gutter="32">
       <el-col :span="6">
-        <trend-data />
+        <trend-data :data="chartData" />
       </el-col>
       <el-col :span="18">
         <trend-chart />
@@ -14,10 +14,19 @@
 <script setup>
 import TrendData from './trend-data.vue'
 import TrendChart from './trend-chart.vue'
+import { getChartTrend } from '@/api/chart'
+import { ref } from 'vue'
+
+const chartData = ref({})
+const getData = async () => {
+  const res = await getChartTrend()
+  chartData.value = res
+}
+getData()
 </script>
 <style lang="scss" scoped>
 .container {
-  background-color: #bcbfc3;
+  // background-color: #bcbfc3;
   height: 286px;
 }
 </style>
