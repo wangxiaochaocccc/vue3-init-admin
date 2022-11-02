@@ -5,7 +5,7 @@
         <trend-data :data="chartData" v-if="chartData.allAmount" />
       </el-col>
       <el-col :span="18">
-        <trend-chart />
+        <trend-chart :data="chartData" v-if="chartData.allAmount" />
       </el-col>
     </el-row>
   </el-card>

@@ -6,6 +6,13 @@
 import * as echarts from 'echarts'
 import { ref, onMounted } from 'vue'
 
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true
+  }
+})
+
 const target = ref(null)
 let mChart
 onMounted(() => {
@@ -18,32 +25,93 @@ onMounted(() => {
  */
 const renderChart = () => {
   const options = {
-    // 图表标题配置
-    title: {
-      // 标题文本
-      text: 'ECharts 入门示例'
+    // 鼠标移入提示框配置
+    tooltip: {
+      // 鼠标移入坐标轴是，触发提示
+      trigger: 'axis',
+      // 提示框配置项
+      axisPointer: {
+        // 十字准星
+        type: 'cross',
+        // 样式
+        crossStyle: {
+          color: '#999'
+        }
+      }
     },
     // 图例配置
     legend: {
       // 图例数据
-      data: ['销量']
+      data: ['月累计收益', '日收益曲线'],
+      // 位置
+      right: 0
+    },
+    // 网格绘制位置
+    grid: {
+      top: 20,
+      right: 0,
+      left: 0,
+      bottom: 0,
+      containLabel: true // 计算边距时，包含标签
     },
     // X 轴配置
     xAxis: {
+      // 坐标轴类型，类目轴
+      type: 'category',
       // 数据
-      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+      data: props.data.monthAmountList.map((item) => item.time),
+      // 刻度尺配置
+      axisTick: {
+        show: false
+      }
     },
     // Y 轴配置
-    yAxis: [{}],
+    yAxis: {
+      type: 'value',
+      min: 0,
+      max: function (value) {
+        return parseInt(value.max * 1.2)
+      },
+      // 刻度上展示的文字
+      axisLabel: {
+        formatter: '{value}万元'
+      }
+    },
     // 图表类型（可以指定多个）
     series: [
       {
         // 图表名字，对应 legend.data[0]
-        name: '销量',
+        name: '月累计收益',
         // 图表的类型
         type: 'bar',
         // 图表的数据
-        data: [5, 20, 36, 10, 10, 20]
+        data: props.data.monthAmountList.map((item) => item.amount),
+        // bar宽度
+        barWidth: 20,
+        // 提示框
+        tooltip: {
+          // 展示内容
+          valueFormatter: function (value) {
+            return value + '万元'
+          }
+        }
+      },
+      {
+        // 图表名字，对应 legend.data[0]
+        name: '日收益曲线',
+        // 图表的类型
+        type: 'line',
+        color: '#6EC6D0',
+        // 图表的数据
+        data: props.data.dailyCurve.map((item) => item.amount),
+        smooth: true,
+        // 提示框
+        tooltip: {
+          // 展示内容
+          valueFormatter: function (value) {
+            return value + '万元'
+          }
+        }
       }
     ]
   }
