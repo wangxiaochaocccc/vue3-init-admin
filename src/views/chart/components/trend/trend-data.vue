@@ -4,7 +4,7 @@
       <div class="title">{{ $t('msg.chart.trendDataTitle') }}</div>
       <div class="all-amount">
         &yen;
-        <span>{{ data.allAmount }}</span>
+        <span ref="allAmountRef">{{ data.allAmount }}</span>
       </div>
     </div>
     <div class="item">
@@ -12,7 +12,7 @@
         {{ $t('msg.chart.trendDataTadayAdded') }}
       </div>
       <div class="money">
-        <span>{{ data.tadayAdded }}</span>
+        <span ref="todayAddedRef">{{ data.tadayAdded }}</span>
         {{ $t('msg.chart.unit') }}
       </div>
     </div>
@@ -21,7 +21,7 @@
         {{ $t('msg.chart.trendDataTadayExpend') }}
       </div>
       <div class="money">
-        <span>{{ data.tadaySub }}</span>
+        <span ref="tadaySubRef">{{ data.tadaySub }}</span>
         {{ $t('msg.chart.unit') }}
       </div>
     </div>
@@ -30,7 +30,7 @@
         {{ $t('msg.chart.trendDataTadayBalance') }}
       </div>
       <div class="money">
-        <span>{{ data.tadayAmount }}</span>
+        <span ref="tadayAmountRef">{{ data.tadayAmount }}</span>
         {{ $t('msg.chart.unit') }}
       </div>
     </div>
@@ -38,11 +38,40 @@
 </template>
 
 <script setup>
-defineProps({
+import { onMounted, ref } from 'vue'
+import { CountUp } from 'countup.js'
+
+const props = defineProps({
   data: {
     type: Object,
     required: true
   }
+})
+
+// 本月累计收益
+const allAmountRef = ref(null)
+// 今日新增收益
+const todayAddedRef = ref(null)
+// 今日新增支出
+const tadaySubRef = ref(null)
+// 今日结余
+const tadayAmountRef = ref(null)
+
+onMounted(() => {
+  const options = {
+    // 小数点位
+    decimalPlaces: 2,
+    // 持续时间
+    duration: 1.5
+  }
+  // 累计回款
+  new CountUp(allAmountRef.value, props.data.allAmount, options).start()
+  // 今日新增
+  new CountUp(todayAddedRef.value, props.data.tadayAdded, options).start()
+  // 今日支出
+  new CountUp(tadaySubRef.value, props.data.tadaySub, options).start()
+  // 今日结余
+  new CountUp(tadayAmountRef.value, props.data.tadayAmount, options).start()
 })
 </script>
 <style lang="scss">

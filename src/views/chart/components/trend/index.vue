@@ -2,7 +2,7 @@
   <el-card class="container">
     <el-row :gutter="32">
       <el-col :span="6">
-        <trend-data :data="chartData" />
+        <trend-data :data="chartData" v-if="chartData.allAmount" />
       </el-col>
       <el-col :span="18">
         <trend-chart />
