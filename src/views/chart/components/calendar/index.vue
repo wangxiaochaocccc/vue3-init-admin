@@ -25,8 +25,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { getChartCalendar } from '@/api/chart'
+import emitter from '@/utils/eventHub'
 
 // 当前时间
 const currentDate = ref(new Date())
@@ -69,6 +70,10 @@ const getClassName = (date) => {
   }
   return ''
 }
+// 向外触发方法
+watch(currentDate, (val) => {
+  emitter.emit('calendarChange', val)
+})
 </script>
 <style lang="scss" scoped>
 .container {

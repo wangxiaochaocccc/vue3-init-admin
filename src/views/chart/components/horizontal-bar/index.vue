@@ -9,6 +9,7 @@ import { getChartTimeAmount } from '@/api/chart'
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 import { useI18n } from 'vue-i18n'
+import emitter from '@/utils/eventHub'
 
 const i18n = useI18n()
 // 初始化echart
@@ -23,9 +24,8 @@ const getData = async (date) => {
   const { result } = await getChartTimeAmount(date)
   todayAmount.value = result
   renderEchart()
-  console.log(todayAmount.value)
 }
-getData('2022-10-22')
+getData(new Date())
 
 // 渲染echart方法
 const renderEchart = () => {
@@ -157,6 +157,11 @@ const renderEchart = () => {
   }
   mChart.setOption(options)
 }
+
+// 接收日历变化的方法
+emitter.on('calendarChange', (val) => {
+  getData(val)
+})
 </script>
 <style lang="scss" scoped>
 .container {
