@@ -51,3 +51,11 @@ export const getChartMap = () => {
     url: '/chart/bmap'
   })
 }
+/**
+ * 大区数据
+ */
+export const getChartRegions = () => {
+  return request({
+    url: '/chart/regions'
+  })
+}
