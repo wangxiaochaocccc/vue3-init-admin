@@ -1,11 +1,20 @@
 <template>
-  <div class="container">累计收益</div>
+  <el-row :gutter="20">
+    <el-col :span="18">
+      <s2-vue />
+    </el-col>
+    <el-col :span="6">
+      <sheet-table v-for="item in 6" :key="item" class="mb-20" />
+    </el-col>
+  </el-row>
 </template>
 
-<script setup></script>
+<script setup>
+import S2Vue from './components/s2.vue'
+import SheetTable from './components/sheet-table.vue'
+</script>
 <style lang="scss" scoped>
-.container {
-  background-color: #bcbfc3;
-  height: 804px;
+.mb-20 {
+  margin-bottom: 20px;
 }
 </style>
