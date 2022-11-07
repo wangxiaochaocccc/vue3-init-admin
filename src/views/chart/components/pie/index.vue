@@ -9,6 +9,7 @@ import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getChartPie } from '@/api/chart'
 import * as echarts from 'echarts'
+import { watchSwitchLanguage } from '@/utils/i18n'
 
 const i18n = useI18n()
 
@@ -74,6 +75,7 @@ const renderChart = () => {
   }
   mChart.setOption(options)
 }
+watchSwitchLanguage(getData)
 </script>
 <style lang="scss" scoped>
 .container {
