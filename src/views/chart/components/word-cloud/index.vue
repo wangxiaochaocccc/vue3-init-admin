@@ -12,6 +12,7 @@ import { getChartWordCloud } from '@/api/chart'
 import * as echarts from 'echarts'
 import { renderRGB } from '@/utils/color'
 import 'echarts-wordcloud'
+import wordcloudBg from '@/assets/wordcloud.png'
 
 const i18n = useI18n()
 let mChart
@@ -32,6 +33,9 @@ getData()
 
 // 渲染echart
 const renderChart = () => {
+  const maskImage = new Image()
+  maskImage.src = wordcloudBg
+
   const options = {
     title: {
       text: i18n.t('msg.chart.cloudChartTitle')
@@ -52,6 +56,8 @@ const renderChart = () => {
         // 随机色值
         color: renderRGB
       },
+      // 背景轮廓
+      maskImage,
       // 高亮字体
       emphasis: {
         textStyle: {
@@ -64,8 +70,9 @@ const renderChart = () => {
       data: wordData.value
     }
   }
-
-  mChart.setOption(options)
+  maskImage.onload = () => {
+    mChart.setOption(options)
+  }
 }
 // 国际化
 watchSwitchLanguage(getData)
