@@ -10,7 +10,7 @@
       <lang-select class="right-container-menu"></lang-select>
       <el-dropdown trigger="click" class="dropdown-container">
         <div class="avatar-container">
-          <el-avatar shape="square" :size="40" src="/logo.jpeg"></el-avatar>
+          <el-avatar shape="square" :size="40" :src="logo"></el-avatar>
           <el-icon>
             <tools />
           </el-icon>
@@ -42,6 +42,8 @@ import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
 import Guide from '@/components/Guide/index.vue'
+import logo from '@/assets/logo.jpeg'
+
 const store = useStore()
 const loginout = () => {
   store.dispatch('user/logout')

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="logo-conatiner">
-      <el-avatar :size="44" shape="square" src="/logo.jpeg"></el-avatar>
+      <el-avatar :size="44" shape="square" :src="logo"></el-avatar>
       <div class="title" v-if="$store.getters.sidebarOpened">my-admin</div>
     </div>
     <el-scrollbar>
@@ -12,6 +12,7 @@
 
 <script setup>
 import SideBar from './SideBar.vue'
+import logo from '@/assets/logo.jpeg'
 </script>
 <style lang="scss">
 .logo-conatiner {

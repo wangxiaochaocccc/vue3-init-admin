@@ -5,7 +5,7 @@
         <div>个人介绍</div>
       </template>
       <div class="info-conatiner">
-        <pan-thumb image="/logo.jpeg" :height="'100px'" :width="'100px'">
+        <pan-thumb :image="logo" :height="'100px'" :width="'100px'">
           <p><a>Hello</a></p>
           {{ $store.getters.userInfo.title }}
         </pan-thumb>
@@ -46,6 +46,7 @@
 
 <script setup>
 import PanThumb from '@/components/PanThumb/index.vue'
+import logo from '@/assets/logo.jpeg'
 
 defineProps({
   featureData: {
