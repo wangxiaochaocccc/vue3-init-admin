@@ -11,6 +11,8 @@ import installFilters from './filters'
 import installDirective from './directives'
 import i18n from './i18n'
 import './permission.js'
+import 'default-passive-events'
+
 const app = createApp(App)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
